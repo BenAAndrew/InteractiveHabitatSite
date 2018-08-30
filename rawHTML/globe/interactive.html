@@ -1,0 +1,252 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>WikiEcosystem</title>
+		<meta charset="utf-8" />	
+		<link rel="stylesheet" href="main.css" />
+		<link rel="stylesheet" href="Treant.css">
+		<link rel="stylesheet" href="collapsable.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="features.js"></script>
+		<style>
+		.filter {
+			background-color: #EEE;
+			box-shadow: 1px 1px 2px rgba(0,0,0,.5);
+			color: #333;
+			font-size: 100%;
+			border-radius: 3px;
+			margin:0;
+			width:20%;
+			padding:0;
+			text-align:center;
+			display:inline-block;
+			margin-right:5%;
+			vertical-align:top;
+		}
+		.filter h4{
+			font-weight: bold;
+			display:inline-block;
+		}
+		</style>
+	</head>
+	<body>
+	<div id="wrapper">
+		<div id="main">
+			<div class="inner">		
+				<!--Info grid-->
+				<section id="1">
+				<h2>Filter animals</h2>
+				<div style="width:20%;display:inline-block;margin-bottom:5%;">
+				<script>
+				var animals = [["Lion","Zebra","Tiger"],["Bald eagle"],["Salmon"]];
+				function updateOptions(){
+					document.getElementById('optAnimal').disabled = false;
+					if(document.getElementById('optType')[0].value == "--Select type--"){
+						document.getElementById('optType').remove(0);
+					}					
+					var option = document.getElementById('optType').value;
+					var addOptions = "<option>Select an animal</option>";
+					if(option == 0){
+						for(var i = 0; i < animals.length; i++){
+							for(var j = 0; j < animals[i].length; j++){
+								addOptions += "<option value='"+animals[i][j]+"'>"+animals[i][j]+"</option>";
+							}
+						}
+					} else {
+						for(var i = 0; i < animals.length; i++){
+							if(i == (option-1)){
+								for(var j = 0; j < animals[i].length; j++){
+									addOptions += "<option value='"+animals[i][j]+"'>"+animals[i][j]+"</option>";
+								}
+							}
+						}
+					}
+					document.getElementById('optAnimal').innerHTML = addOptions;
+				}
+				</script>
+				<h4>Type</h4>
+				<select id="optType" onchange="updateOptions()">
+					<option>--Select type--</option>
+					<option value="0">All</option>
+					<option value="1">Mammals</option>
+					<option value="2">Birds</option>
+					<option value="3">Fish</option>
+				</select>
+				</div>
+				<div style="width:20%;display:inline-block;margin-right:5%;">
+				<h4>Options</h4>
+				<script>
+				function removeAll(){
+					document.getElementById("filters").innerHTML = "<p>Animals</p>";
+					updateAnimals("$all$", false);
+				}
+
+				function removeFilter(opt){
+					$("#"+opt).remove();
+					var buttonCheck = document.getElementById("filters").innerHTML.split("<")[3];
+					if(buttonCheck.startsWith("button")){
+						document.getElementById("filters").innerHTML = "<p>Animals</p>";
+					}
+					updateAnimals(opt, false);
+				}
+	
+				function addAnimalFilter(){
+					var option = document.getElementById('optAnimal').value;
+					if(option != "Select an animal"){
+						if(document.getElementById(option) == null){
+							$("#removeAll").remove();
+							$("<div class='filter' id='"+option.replace(" ","")+"'>"+option+" <h4 onclick='removeFilter(\x22"+option.replace(" ","")+"\x22)'>x</h4></div>").appendTo(document.getElementById("filters"));
+							$("<button onclick='removeAll()' id='removeAll'>Remove All</button>").appendTo(document.getElementById("filters"));
+							updateAnimals(option, true);
+						} else {
+							alert("Animal already in list");
+						}						
+					}
+				}
+				</script>
+				<select id="optAnimal" onchange="addAnimalFilter()" disabled>
+				<option value='null'>--Select a type first--</option>
+				</select>
+				</div>
+				<div style="width:40%;display:inline-block;vertical-align:top;" id="filters">
+				<p>Animals:</p>
+				</div>
+				<center><a id="link" href="#2"><span class = "mini-icon fa-arrow-down"></span></a></center>
+				</section>
+					
+				<!--Section One-->
+				<section id="2">
+				<center><a id="link" href="#1"><span class = "mini-icon fa-arrow-up"></span></a></center>
+				<header>
+					<h3>Interactive Globe</h3>
+				</header>
+					<script type='text/javascript' src='http://d3js.org/d3.v3.min.js'></script>
+					<script type='text/javascript' src='http://d3js.org/topojson.v1.min.js'></script>
+					<script type='text/javascript' src='planetaryjs.min.js'></script>
+					<div style="width:50%;display:inline-block;margin-left:0;margin-right:1%;">
+						<canvas id='globe' width='620' height='600'></canvas>
+					</div>
+				    <script type='text/javascript' src='globe.js'></script>
+					<div style="display:inline-block;width:20%;margin-left:20%;vertical-align:top;">
+					<script>
+					var colours = ['red', 'yellow', 'white', 'orange', 'green', 'cyan', 'pink'];
+					function updateAnimals(animal, add){
+						if(add){
+							var arrPos = -1;
+							for(var i = 0; i < animals.length; i++){
+								for(var j = 0; j < animals[i].length; j++){
+									if(animals[i][j] == animal){
+										arrPos = i;
+										colour = colours[i];
+										break;
+									}
+								}
+							}
+							$("<li id='"+animal.replace(" ","")+"' style='border: solid "+colour+" 1px;'>"+animal+"</li>").appendTo(document.getElementById("filterList"));
+							if(arrPos !== -1){
+								ignore.splice(ignore.indexOf(arrPos),1);
+							}
+						} else {
+							if(animal == "$all$"){
+								document.getElementById('filterList').innerHTML = "";
+								for (var i = 0; i < animals.length; i++) {
+									ignore.push(i);
+								}
+							} else {
+								$("#"+animal.replace(" ","")).remove();
+								for(var i = 0; i < animals.length; i++){
+									for(var j = 0; j < animals[i].length; j++){
+										alert(animals[i][j].replace(" ","") == animal.replace(" ",""));
+										if(animals[i][j].replace(" ","") == animal.replace(" ","")){
+											ignore.push(i);
+											break;
+										}
+									}
+								}
+							}
+						}
+						destroy(createGlobe());
+						createGlobe();
+					}
+					</script>
+					<ul id="filterList">
+
+
+					</ul>
+					</div>
+				<center><a id="link" href="#3"><span class = "mini-icon fa-arrow-down"></span></a></center>
+				</section>
+				
+				<!--Section Two-->
+				<section id="3">
+				<center><a id="link" href="#2"><span class = "mini-icon fa-arrow-up"></span></a></center>
+				<div class="content">
+					<h3>Interactive Food Chain</h3>
+					<div class="chart" id="tree"></div>
+					<script src="raphael.js"></script>
+					<script src="Treant.js"></script>
+					<script src="jquery.min.js"></script>
+					<script src="jquery.easing.js"></script>
+					<script src="collapsable.js"></script>
+					<script>
+						tree = new Treant( chart_config );
+					</script>
+				</div>
+				</section>
+			</div>
+		</div>
+
+		<!-- Sidebar -->
+		<div id="sidebar">
+			<div class="inner">
+				<!-- Search -->
+				<section id="search" class="alt">
+					<form name="searchForm" onsubmit="return search()" >
+						<input type="text" name="query" id="query" placeholder="Search" />
+					</form>
+				</section>
+
+				<!-- Menu -->
+				<nav id="menu">
+					<header class="major">
+						<h2>Menu</h2>
+					</header>
+					<ul>
+						<li><a href="index.html">Home</a></li>
+						<li><a href="archive.html">Animals</a></li>
+						<li><a href="interactive.html">Interactive</a></li>
+						<li><a href="login.html">Login</a></li>
+						<li><a href="contact.html">Contact</a></li>
+					</ul>
+				</nav>			
+
+				<!-- Contact -->
+				<section>
+					<header class="major">
+						<h2>Login</h2>
+					</header>
+					<p>Login to the system to contribute and amend animals</p>
+					<ul class="contact">
+						<form>
+						<li class="fa-user"><input type="text" placeholder="Username"></li>
+						<li class="fa-lock"><input type="password" placeholder="Password"></li>
+						<li><input type="submit"></li>
+						</form>
+					</ul>
+				</section>
+
+				<!-- Footer -->
+				<footer id="footer">
+					<p class="copyright"> Design: Team 10</p>
+				</footer>
+			</div>
+		</div>
+	</div>
+
+	<!-- Scripts -->
+	<script src="jquery.min.js"></script>
+	<script src="skel.min.js"></script>
+	<script src="util.js"></script>
+	<script src="main.js"></script>
+	</body>
+</html>

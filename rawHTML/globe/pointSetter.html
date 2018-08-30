@@ -1,0 +1,60 @@
+<html>
+<body>
+  <h1>Pins</h1>
+  <select id="pins" name="pins" onchange="addPins()">
+	<option value="1">1</option>
+	<option value="2">2</option>
+	<option value="3">3</option>
+	<option value="4">4</option>
+	<option value="5">5</option>
+  </select><br><br>
+  <div id="map" style="height: 400px; width: 400px;"></div>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGK_hu3rsiyivVViUAxxU3yKJ_z4q3h4M&callback=initMap"></script><br>
+  
+  <div id="button">
+	<button id="addPin" onclick="submitPin()">Submit location 1</button>
+  </div>
+  
+  <ul id="locations"></ul>
+  
+  <p style="visibility: hidden;" id="coordinates"></p>
+  <script>
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 3,
+          center: {lat: 10, lng: 10}
+        });
+			var marker = new google.maps.Marker({
+				position: {lat: 10, lng: 10},
+				map: map,
+				draggable: true,
+				title: "Place pin"
+			});
+			marker.addListener('drag', function() {
+				document.getElementById('coordinates').innerHTML = marker.getPosition().lng().toFixed(4).toString()+","+marker.getPosition().lat().toFixed(4).toString();
+			});
+    }
+	
+	function addPins(){
+		document.getElementById('locations').innerHTML = "";
+		document.getElementById('button').innerHTML = "<button id='addPin' onclick='submitPin()'>Submit location 1</button>";
+		initMap();
+	}
+	  
+	function submitPin(){
+		var info = document.getElementById('coordinates').innerHTML.split(",");
+		if(info.length != 1){ 
+			document.getElementById('locations').innerHTML += "<li> Longtitude: "+info[0]+" Latitude: "+info[1];
+			if (document.getElementById('addPin').innerHTML.substring(16) == document.getElementById('pins').value){
+				document.getElementById('button').innerHTML = "<p>All locations have been added</p>";
+			} else {
+				document.getElementById('addPin').innerHTML = "Submit location "+(parseInt(document.getElementById('addPin').innerHTML.substring(16))+1).toString();
+			}
+		} else {
+			alert("Please move the pin into the location on the map");
+		}
+	}
+  </script>
+  
+</body>
+</html>
