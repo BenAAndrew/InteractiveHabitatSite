@@ -1,0 +1,175 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>WikiEcosystem</title>
+		<meta charset="utf-8" />	
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="treant/Treant.css">
+		<link rel="stylesheet" href="treant/collapsable.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script>
+		$(document).ready(function(){
+		  // Add smooth scrolling to all links
+		  $("a").on('click', function(event) {
+			if (this.hash !== "") {
+			  event.preventDefault();
+			  var hash = this.hash;
+			  $('html, body').animate({
+				scrollTop: $(hash).offset().top
+			  }, 800, function(){
+				window.location.hash = hash;
+			  });
+			}
+		  });
+		});
+		</script>
+	</head>
+	<body>
+	<div id="wrapper">
+		<div id="main">
+			<div class="inner">	
+                <br><br>
+                <!-- Header -->
+                <div class = "content align-center">				
+              <header class="major align-center"> 
+                <h1>Log In</h1>
+              </header>
+			  <p><b>Please Enter Your Email and Password<p>
+			  <form method="get" action = onsubmit="return checkform(this);">
+			  <div class = "box">
+			  <div class = "tooltip">
+			  <input style= "" type = "email" value ="" id="email" placeholder = "Username"/>
+			  <span class="tooltiptext">Type in your Email</span>
+			  </div>
+			  <input style = "width:20.5%; margin-left:39.7%; margin-top:1%;" type = "password" value ="" id="password" placeholder = "Password"/>
+			  <!-- START CAPTCHA -->
+               <br>
+               <div class="capbox">
+                <div id="CaptchaDiv"></div>
+                 <div class="capbox-inner">
+                 Type the above number:<br>
+                 <input type="hidden" id="txtCaptcha">
+                 <input type="text" name="CaptchaInput" id="CaptchaInput" size="15"><br>
+
+                </div>
+            </div>
+          <br><br>
+            <!-- END CAPTCHA -->
+
+              <div class = "12u$">
+              <ul class = "actions">
+               <li><input type= "submit" value = "Submit" class = "special"/> </li>
+              </div>
+			  </form>
+			  <script type="text/javascript">
+
+// Captcha Script
+
+function checkform(theform){
+var why = "";
+
+if(theform.CaptchaInput.value == ""){
+why += "- Please Enter CAPTCHA Code.\n";
+}
+if(theform.CaptchaInput.value != ""){
+if(ValidCaptcha(theform.CaptchaInput.value) == false){
+why += "- The CAPTCHA Code Does Not Match.\n";
+}
+}
+if(why != ""){
+alert(why);
+return false;
+}
+}
+
+var a = Math.ceil(Math.random() * 9)+ '';
+var b = Math.ceil(Math.random() * 9)+ '';
+var c = Math.ceil(Math.random() * 9)+ '';
+var d = Math.ceil(Math.random() * 9)+ '';
+var e = Math.ceil(Math.random() * 9)+ '';
+
+var code = a + b + c + d + e;
+document.getElementById("txtCaptcha").value = code;
+document.getElementById("CaptchaDiv").innerHTML = code;
+
+// Validate input against the generated number
+function ValidCaptcha(){
+var str1 = removeSpaces(document.getElementById('txtCaptcha').value);
+var str2 = removeSpaces(document.getElementById('CaptchaInput').value);
+if (str1 == str2){
+return true;
+}else{
+return false;
+}
+}
+
+// Remove the spaces from the entered and generated code
+function removeSpaces(string){
+return string.split(' ').join('');
+}
+</script>
+
+           </div>
+		   </div>
+		</div>
+	</div>
+
+		<!-- Sidebar -->
+		<div id="sidebar">
+			<div class="inner">
+				<!-- Search -->
+				<script>
+					function search() {
+						var searchItem = document.forms["searchForm"]["query"].value.substring(0,1);
+						var directory = document.location.href.split("/");
+						var currentPage = directory[directory.length-1].length;
+						var url = document.location.href.substring(0, document.location.href.length-currentPage)+"archive.html#"+searchItem;
+						window.location.assign(url);
+						return false;
+					}
+				</script>
+				<section id="search" class="alt">
+					<form name="searchForm" onsubmit="return search()" >
+						<input type="text" name="query" id="query" placeholder="Search" />
+					</form>
+				</section>
+
+				<!-- Menu -->
+				<nav id="menu">
+					<header class="major">
+						<h2>Menu</h2>
+					</header>
+					<ul>
+						<li><a href="index.html">Home</a></li>
+						<li><a href="#">other</a></li>
+						<li><a href="#">other2</a></li>
+					</ul>
+				</nav>			
+
+				<!-- Contact -->
+				<section>
+					<header class="major">
+						<h2>Get in touch</h2>
+					</header>
+					<p>Problem with the system or just want to get in touch? Contact us below;</p>
+					<ul class="contact">
+						<li class="fa-envelope-o">Name</li>
+						<li class="fa-envelope-o">Email</li>
+					</ul>
+				</section>
+
+				<!-- Footer -->
+				<footer id="footer">
+					<p class="copyright"> Design: Team 10</p>
+				</footer>
+			</div>
+		</div>
+	</div>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+	</body>
+</html>

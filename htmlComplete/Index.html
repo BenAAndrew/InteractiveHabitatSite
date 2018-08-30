@@ -1,0 +1,197 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>WikiEcosystem</title>
+		<meta charset="utf-8" />	
+		<link rel="stylesheet" href="main.css" />
+		<link rel="stylesheet" href="Treant.css">
+		<link rel="stylesheet" href="collapsable.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="features.js"></script>
+	</head>
+	<body>
+	<div id="wrapper">
+		<div id="main">
+			<div class="inner">		
+				<!--Info grid-->
+				<section id="1">
+				<header class="major">
+					<h2>Welcome to WikiEcosystem</h2>
+					<h3>Here are some of the features of this system</h3>
+				</header>
+				<div class="features">
+				<article>
+					<span class="icon fa-bug"></span>
+					<div class="content">
+						<h3>Heirachy</h3>
+						<p>The relationship of all organisms is automatically updated so you can learn more about our ecosystem</p>
+					</div>
+				</article>
+				<article>
+					<span class="icon fa-table"></span>
+					<div class="content">
+						<h3>Library</h3>
+						<p>All the animals and organisms can be easily found and updated from the search</p>
+					</div>
+				</article>
+				<article>
+					<span class="icon fa-odnoklassniki"></span>
+					<div class="content">
+						<h3>Community</h3>
+						<p>Our system is created by our users and your contributions can be seen and rated to gain system privileges</p>
+					</div>
+				</article>
+				<article>
+					<span class="icon fa-youtube-play"></span>
+					<div class="content">
+						<h3>Media</h3>
+						<p>Add images, videos and links to build animal profiles and share more interesting facts</p>
+					</div>
+				</article>
+				</div>
+				<div style="text-align:center;">
+				<h3>Get started;</h3>				
+					<a href="archive.html" class="button special" style="margin-right:20%">Find an organism</a>
+					<a href="newanimal.html" class="button special">Add an organism</a>
+				<center><a id="link" href="#2"><span class = "mini-icon fa-arrow-down"></span></a></center>
+				</section>
+					
+				<!--Section One-->
+				<section id="2">
+				<center><a id="link" href="#1"><span class = "mini-icon fa-arrow-up"></span></a></center>
+				<header>
+					<h3>Interactive Globe</h3>
+				</header>
+					<script type='text/javascript' src='http://d3js.org/d3.v3.min.js'></script>
+					<script type='text/javascript' src='http://d3js.org/topojson.v1.min.js'></script>
+					<script type='text/javascript' src='planetaryjs.min.js'></script>
+					<div style="width:50%;display:inline-block;margin-left:0;margin-right:1%;">
+						<canvas id='globe' width='620' height='600'></canvas>
+					</div>
+				    <script type='text/javascript' src='globe.js'></script>
+					<div style="display:inline-block;width:20%;margin-left:20%;vertical-align:top;">
+					<script>
+					function updateAnimalList(){
+						var filter = document.getElementById("filter").value;
+						var ul = document.getElementById("filterList");
+						var liList = ul.getElementsByTagName("li");
+						ignore = []
+						for(var i = 0; i < liList.length; i++){
+							var li = document.getElementById("li"+i);
+							if(filter != 0){
+								if(li.value != filter){
+									li.style.display = "none";
+									ignore.push(i);
+								} else {
+									li.style.display = "block";
+								}
+							} else {
+								li.style.display = "block";
+							}
+						}
+					}
+					</script>
+					<select id="filter" onchange="updateAnimalList()">
+					  <option value="0">All</option>
+					  <option value="1">Mammals</option>
+					  <option value="2">Birds</option>
+					  <option value="3">Fish</option>
+					</select><br><br>
+					<ul id="filterList">
+						<li id="li0" onclick="changeStatus(0);" value="1" style="border: solid red 1px;">Tiger</li>
+						<li id="li1" onclick="changeStatus(1);" value="3" style="border: solid yellow 1px;">Salmon</li>
+						<li id="li2" onclick="changeStatus(2);" value="2" style="border: solid white 1px;">Bald eagle</li>
+						<!---<script>
+						var animals = ["Lion","Zebra","Iguana"]
+						var colours = ["red","yellow","white"]
+						for(var i = 0; i < animals.length; i++){
+							var node = document.createElement("LI");
+							node.style = "border: solid "+colours[i]+" 1px;";
+							node.id = "li"+i;
+							node.innerHTML = animals[i];
+							document.getElementById("filterList").appendChild(node);
+							var element = document.getElementById('li'+i);
+							element.onclick = function() {
+							  changeStatus(i);
+							}
+						}
+						</script>--->
+					</ul>
+					</div>
+				<center><a id="link" href="#3"><span class = "mini-icon fa-arrow-down"></span></a></center>
+				</section>
+				
+				<!--Section Two-->
+				<section id="3">
+				<center><a id="link" href="#2"><span class = "mini-icon fa-arrow-up"></span></a></center>
+				<div class="content">
+					<h3>Interactive Food Chain</h3>
+					<div class="chart" id="tree"></div>
+					<script src="raphael.js"></script>
+					<script src="Treant.js"></script>
+					<script src="jquery.min.js"></script>
+					<script src="jquery.easing.js"></script>
+					<script src="collapsable.js"></script>
+					<script>
+						tree = new Treant( chart_config );
+					</script>
+				</div>
+				</section>
+			</div>
+		</div>
+
+		<!-- Sidebar -->
+		<div id="sidebar">
+			<div class="inner">
+				<!-- Search -->
+				<section id="search" class="alt">
+					<form name="searchForm" onsubmit="return search()" >
+						<input type="text" name="query" id="query" placeholder="Search" />
+					</form>
+				</section>
+
+				<!-- Menu -->
+				<nav id="menu">
+					<header class="major">
+						<h2>Menu</h2>
+					</header>
+					<ul>
+						<li><a href="index.html">Home</a></li>
+						<li><a href="AnimalArchive.html">Animals</a></li>
+						<li><a href="interactive.html">Interactive</a></li>
+						<li><a href="login.html">Login</a></li>
+						<li><a href="signup.html">Sign Up</a></li>
+						<li><a href="ContactUs.html">Contact</a></li>
+					</ul>
+				</nav>			
+
+				<!-- Contact -->
+				<section>
+					<header class="major">
+						<h2>Login</h2>
+					</header>
+					<p>Login to the system to contribute and amend animals</p>
+					<ul class="contact">
+						<form>
+						<li class="fa-user"><input type="text" placeholder="Username"></li>
+						<li class="fa-lock"><input type="password" placeholder="Password"></li>
+						<li><input type="submit"></li>
+						</form>
+					</ul>
+				</section>
+
+				<!-- Footer -->
+				<footer id="footer">
+					<p class="copyright"> Design: Team 10</p>
+				</footer>
+			</div>
+		</div>
+	</div>
+
+	<!-- Scripts -->
+	<script src="jquery.min.js"></script>
+	<script src="skel.min.js"></script>
+	<script src="util.js"></script>
+	<script src="main.js"></script>
+	</body>
+</html>

@@ -1,0 +1,86 @@
+
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>WikiEcosystem</title>
+		<meta charset="utf-8" />	
+		<link rel="stylesheet" href="main.css" />
+		<link rel="stylesheet" href="Treant.css">
+		<link rel="stylesheet" href="collapsable.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	</head>
+	<body>
+	<div id="wrapper">
+		<div id="main">
+			<div class="inner align-center">		
+				<header class = "major align-center">
+				<h1 >Sign up</h1>
+				</header>
+				<p><b>To sign up and become a contributing member to the wonderful community simply enter your details below!</b></p>
+				<div>
+				<form class = "box" action = "LogIn.html/submit" method ="post">
+                <input style="width: 30%;margin:auto;margin-bottom:1%;" type="text" name="demo-name" id="username" value="" placeholder="First Name"> 
+				<input style="width: 30%;margin:auto;margin-bottom:1%;" type= "text" name="last-name" id="lastname" value="" placeholder= "Last Name" >
+				<input style="width: 30%;margin:auto;margin-bottom:1%;" type ="text" name="Email" id="email" value="" placeholder = "Email">
+				<input style = "width: 30%;margin:auto;margin-bottom:1%;" type = "Password" name = "password" id="password" value = "" placeholder= "Password">
+				<input style = "width: 30%;margin:auto;margin-bottom:1%;" type = "Password" name = "password2" id="password2" value = "" placeholder= "Re-Type Password">
+				<input style = "width: 30%;margin:auto;" type="submit" value="Submit" class="special">
+				</form>
+
+                 </div>
+			</div>
+		</div>
+		<!-- Sidebar -->
+		<div id="sidebar">
+			<div class="inner">
+				<!-- Search -->
+				<section id="search" class="alt">
+					<form name="searchForm" onsubmit="return search()" >
+						<input type="text" name="query" id="query" placeholder="Search" />
+					</form>
+				</section>
+
+				<!-- Menu -->
+				<nav id="menu">
+					<header class="major">
+						<h2>Menu</h2>
+					</header>
+					<ul>
+						<li><a href="index.html">Home</a></li>
+						<li><a href="AnimalArchive.html">Animals</a></li>
+						<li><a href="interactive.html">Interactive</a></li>
+						<li><a href="login.html">Login</a></li>
+						<li><a href="signup.html">Sign Up</a></li>
+						<li><a href="ContactUs.html">Contact</a></li>
+					</ul>
+				</nav>			
+
+				<!-- Contact -->
+				<section>
+					<header class="major">
+						<h2>Login</h2>
+					</header>
+					<p>Login to the system to contribute and amend animals</p>
+					<ul class="contact">
+						<form>
+						<li class="fa-user"><input type="text" placeholder="Username"></li>
+						<li class="fa-lock"><input type="password" placeholder="Password"></li>
+						<li><input type="submit"></li>
+						</form>
+					</ul>
+				</section>
+				<!-- Footer -->
+				<footer id="footer">
+					<p class="copyright"> Design: Team 10</p>
+				</footer>
+			</div>
+		</div>
+	</div>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+	</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>WikiEcosystem</title>
+		<meta charset="utf-8" />	
+		<link rel="stylesheet" href="main.css" />
+		<link rel="stylesheet" href="Treant.css">
+		<link rel="stylesheet" href="collapsable.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="features.js"></script>
+	</head>
+	<body>
+	<div id="wrapper">
+		<div id="main">
+			<div class="inner">		
+				<!--Info grid-->
+				<section id="1">
+				<h2>Filter animals</h2>
+				<div style="width:20%;display:inline-block;margin-bottom:5%;">
+				<script>
+				function updateOptions(){
+					var val = document.getElementById("optType").value;
+					window.location.href = "comments.html/type/"+val;
+				}
+				
+				function updateAnimal(){
+					var val = document.getElementById("optAnimal").value;
+					window.location.href = "comments.html/animal/"+val;
+				}
+				
+				function addComment(){
+					if(document.getElementById("comments").innerHTML.indexOf("<form method=\"GET\">") == -1) {
+						$("<form method=\"GET\" action=\"comments.html/comment\"><br><input type='text' name='comment' placeholder='Comment'/><br><input type='submit'/></form>").appendTo(document.getElementById("comments"));
+					}
+				}
+				</script>
+				<h4>Type</h4>
+				<select id="optType" onchange="updateOptions()">
+					<option value="0">All</option>
+					<option value="1">Mammals</option>
+					<option value="2">Birds</option>
+					<option value="3">Fish</option>
+				</select>
+				</div>
+				<div style="width:20%;display:inline-block;margin-right:5%;">
+				<h4>Animals</h4>
+				<select id="optAnimal" onchange="updateAnimal()">
+				</select>
+				</div>
+				<center><a id="link" href="#2"><span class = "mini-icon fa-arrow-down"></span></a></center>
+				</section>
+				<section id="2">
+				<div id="comments">
+				<div class="comment"><b>User <i>(Lion)</i>: </b><p>Abc</p></div>
+				<button onclick="addComment()">Add comment</button>
+				</div>
+				<center><a id="link" href="#1"><span class = "mini-icon fa-arrow-up"></span></a></center>
+				</section>
+			</div>
+
+		</div>
+
+		<!-- Sidebar -->
+		<div id="sidebar">
+			<div class="inner">
+				<!-- Search -->
+				<section id="search" class="alt">
+					<form name="searchForm" onsubmit="return search()" >
+						<input type="text" name="query" id="query" placeholder="Search" />
+					</form>
+				</section>
+				<!-- Menu -->
+				<nav id="menu">
+					<header class="major">
+						<h2>Menu</h2>
+					</header>
+					<ul>
+						<li><a href="index.html">Home</a></li>
+						<li><a href="archive.html">Animals</a></li>
+						<li><a href="interactive.html">Interactive</a></li>
+						<li><a href="login.html">Login</a></li>
+						<li><a href="contact.html">Contact</a></li>
+					</ul>
+				</nav>			
+				<!-- Contact -->
+				<section>
+					<header class="major">
+						<h2>Login</h2>
+					</header>
+					<p>Login to the system to contribute and amend animals</p>
+					<ul class="contact">
+						<form>
+						<li class="fa-user"><input type="text" placeholder="Username"></li>
+						<li class="fa-lock"><input type="password" placeholder="Password"></li>
+						<li><input type="submit"></li>
+						</form>
+					</ul>
+				</section>
+				<!-- Footer -->
+				<footer id="footer">
+					<p class="copyright"> Design: Team 10</p>
+				</footer>
+			</div>
+		</div>
+	</div>
+
+	<!-- Scripts -->
+	<script src="jquery.min.js"></script>
+	<script src="skel.min.js"></script>
+	<script src="util.js"></script>
+	<script src="main.js"></script>
+	</body>
+</html>

@@ -1,0 +1,12 @@
+.node-text p{ background: #fff; font-family: Verdana; text-align: center;}
+
+.node-name{ font-weight: bolder; }
+
+/* optional Container STYLES */
+.chart { height: 600px; width: 900px; margin-top: 10px;  }
+.Treant > .node { border-radius: 3px; padding-bottom:-20px;}
+.Treant > .node img { width: 120px; height: 100px; }
+
+.Treant .collapse-switch { width: 100%; height: 100%; border: none; }
+.Treant .node.collapsed { background-color: #a0e2ff; }
+.Treant .node.collapsed .collapse-switch { background: none; }
